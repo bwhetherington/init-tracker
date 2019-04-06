@@ -1,0 +1,21 @@
+.UrlLoader {
+  margin: auto;
+  width: 200px;
+  padding: 15px;
+}
+
+.UrlLoader .url-fields {
+  padding-bottom: 5px;
+  width: 100%;
+}
+
+.UrlLoader .url-fields input {
+  width: 100%;
+}
+
+.UrlLoader .url-controls {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 5px;
+  height: 1.75em;
+}

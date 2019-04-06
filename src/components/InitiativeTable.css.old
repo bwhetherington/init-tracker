@@ -1,0 +1,58 @@
+.initTable {
+  height: 100% !important;
+  /* background: black !important; */
+}
+
+.initTable .divider {
+  height: 10px;
+}
+
+.initContainer {
+  flex-grow: 1;
+  /* height: 100% !important;
+  width: 100% !important; */
+  overflow: auto;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.initiative {
+  padding-top: 10px;
+  width: 100%;
+}
+
+.initiative > tbody > tr:hover {
+  color: white !important;
+  background-color: #009ba1 !important;
+}
+
+.initTable tbody tr.active {
+  color: white !important;
+  background-color: #006064 !important;
+}
+
+.initTable tbody tr.dead {
+  color: white !important;
+  background-color: rgb(192, 0, 0) !important;
+}
+
+.initTable {
+  display: flex;
+  flex-direction: row;
+}
+
+.initTable .left {
+  display: flex;
+  padding: 5px;
+}
+
+.initTable .right {
+  flex-grow: 1;
+  height: 100%;
+  overflow-y: auto !important;
+}
+
+.initTable .container {
+  display: flex;
+  flex-direction: column;
+}

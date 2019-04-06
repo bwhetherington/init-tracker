@@ -1,0 +1,27 @@
+.TableControls {
+  display: grid;
+  grid-gap: 5px;
+  margin-bottom: 20px;
+  grid-template-rows: 25% 25% 25% 25%;
+}
+
+.TableControls input,
+.TableControls button {
+  margin-left: 2.5px;
+  margin-right: 2.5px;
+}
+
+.TableControls .row-2-1-1 {
+  display: grid;
+  grid-template-columns: 50% 25% 25%;
+}
+
+.TableControls .row-3-1 {
+  display: grid;
+  grid-template-columns: 75% 25%;
+}
+
+.TableControls .row-1-1-1-1 {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+}

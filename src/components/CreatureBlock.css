@@ -1,0 +1,31 @@
+.CreatureBlock table {
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 75%;
+}
+
+.CreatureBlock .left-block {
+  display: block;
+  float: left;
+  padding-bottom: 1em;
+}
+
+.CreatureBlock .right-block {
+  display: block;
+  float: right;
+  padding-bottom: 1em;
+}
+
+.statsTable td {
+  text-align: center;
+  width: 16.67%;
+}
+
+p {
+  margin-bottom: 1em !important;
+}
+
+.entries br {
+  line-height: 2em;
+}

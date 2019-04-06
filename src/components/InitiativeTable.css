@@ -1,0 +1,58 @@
+.InitiativeTable {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.InitiativeTable .container {
+  height: 100%;
+  max-width: 800px;
+  margin: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.InitiativeTable .creature-block-panel {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.controls-panel {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* .InitiativeTable .container .controls-panel {
+  flex-shrink: 0;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 20px;
+} */
+
+.InitiativeTable .controls-panel .table-container {
+  flex-grow: 1;
+  padding-left: 3px;
+  padding-right: 3px;
+  margin-bottom: 20px;
+  overflow: auto;
+}
+
+.InitiativeTable .initiative-table {
+  width: 100%;
+}
+
+.InitiativeTable .initiative-table tbody tr:hover {
+  color: white;
+  background: #009ba1;
+}
+
+.InitiativeTable .initiative-table tbody tr.active {
+  color: white;
+  background: #006064;
+}
+
+.InitiativeTable .initiative-table tbody tr.dead {
+  color: white;
+  background: rgb(160, 0, 0);
+}
