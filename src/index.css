@@ -163,6 +163,7 @@ input[type='text'],
   border: none;
   border-bottom: 2px solid #dee4eb;
   padding: 5px;
+  font-size: inherit;
 }
 
 input[type='number'] {
@@ -170,6 +171,7 @@ input[type='number'] {
   border: none;
   border-bottom: 2px solid #dee4eb;
   padding: 5px;
+  font-size: inherit;
 }
 
 button {

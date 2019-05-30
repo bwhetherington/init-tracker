@@ -14,6 +14,11 @@ class Loader extends Component {
   async componentDidMount() {
     const { urls } = this.props;
     let data = await asyncIterator(importAllObjects(urls))
+      .map(creature => {
+        const copied = { ...creature };
+        delete copied.mustExtend;
+        return copied;
+      })
       .map(convertCreature)
       .collect();
 

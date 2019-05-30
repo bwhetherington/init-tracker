@@ -59,13 +59,26 @@ function convertDescriptions(object) {
   }
 }
 
-export function extendCreature(newCreature, path, creatures) {
+export function extendCreature(newCreature, path, creatures, stack = []) {
+  const creaturePath = `${newCreature.source}#${newCreature.name}`;
+  if (stack.indexOf(creaturePath) !== -1) {
+    throw new Error('circular dependency');
+  }
+
   const [source, name] = path.split('#');
   if (source !== undefined && name !== undefined) {
-    const baseCreature = iterator(creatures)
+    let baseCreature = iterator(creatures)
       .filter(creature => creature.name === name && creature.source === source)
       .take(1)
       .collect()[0];
+
+    // Check if we need to fix parent
+    if (baseCreature.mustExtend) {
+      baseCreature = extendCreature(baseCreature, baseCreature.extends, creatures, [
+        ...stack,
+        creaturePath
+      ]);
+    }
 
     // Combine new and old creatures
     const combination = {
