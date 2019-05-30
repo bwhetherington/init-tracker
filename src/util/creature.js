@@ -1,4 +1,5 @@
 import { fillDefaults, roll } from './util';
+import { iterator } from 'lazy-iters';
 
 const DEFAULT_CREATURE = {
   name: 'DEFAULT CREATURE',
@@ -58,7 +59,48 @@ function convertDescriptions(object) {
   }
 }
 
+export function extendCreature(newCreature, path, creatures) {
+  const [source, name] = path.split('#');
+  if (source !== undefined && name !== undefined) {
+    const baseCreature = iterator(creatures)
+      .filter(creature => creature.name === name && creature.source === source)
+      .take(1)
+      .collect()[0];
+
+    // Combine new and old creatures
+    const combination = {
+      ...baseCreature,
+      ...newCreature
+    };
+
+    // Add additional actions and traits
+    const { addActions, addTraits } = newCreature;
+    if (addActions instanceof Array) {
+      combination.actions = combination.actions.concat(addActions);
+    }
+    if (addTraits instanceof Array) {
+      combination.traits = combination.traits.concat(addTraits);
+    }
+
+    // Clean up
+    delete combination.newActions;
+    delete combination.newTraits;
+    delete combination.mustExtend;
+
+    return combination;
+  } else {
+    throw new Error('invalid path to creature');
+  }
+}
+
 export function convertCreature(creature) {
+  if (creature['extends'] !== undefined) {
+    // Save it for later
+    return {
+      ...creature,
+      mustExtend: true
+    };
+  }
   const base = fillDefaults(creature, DEFAULT_CREATURE);
 
   // Calculate speeds

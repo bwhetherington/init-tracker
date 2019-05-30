@@ -2,9 +2,9 @@ import React from 'react';
 
 import Component from './Component';
 
-import { asyncIterator } from 'lazy-iters';
+import { asyncIterator, iterator } from 'lazy-iters';
 import { importAllObjects } from '../util/data';
-import { convertCreature } from '../util/creature';
+import { convertCreature, extendCreature } from '../util/creature';
 
 class Loader extends Component {
   state = {
@@ -13,9 +13,17 @@ class Loader extends Component {
 
   async componentDidMount() {
     const { urls } = this.props;
-    const data = await asyncIterator(importAllObjects(urls))
+    let data = await asyncIterator(importAllObjects(urls))
       .map(convertCreature)
       .collect();
+
+    // Handle creature inheritance
+    data = iterator(data)
+      .map(creature =>
+        creature.mustExtend ? extendCreature(creature, creature['extends'], data) : creature
+      )
+      .collect();
+
     console.log(`Loaded ${data.length} creatures.`);
     this.updateState({ data });
   }
