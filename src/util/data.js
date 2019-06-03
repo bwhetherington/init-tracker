@@ -1,10 +1,14 @@
 import { asyncIterator } from 'lazy-iters';
 
 export async function* importObjects(url) {
-  const data = await fetch(url);
-  const json = await data.json();
-  const source = json.name;
-  yield* json.creatures.map(c => ({ ...c, source }));
+  try {
+    const data = await fetch(url);
+    const json = await data.json();
+    const source = json.name;
+    yield* json.creatures.map(c => ({ ...c, source }));
+  } catch (ex) {
+    console.log(url, ex);
+  }
 }
 
 export async function* importAllObjects(urls) {
