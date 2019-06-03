@@ -99,6 +99,7 @@ export function extendCreature(newCreature, path, creatures, stack = []) {
     delete combination.newActions;
     delete combination.newTraits;
     delete combination.mustExtend;
+    delete combination.extends;
 
     return combination;
   } else {

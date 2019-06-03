@@ -144,6 +144,20 @@ function renderList(name, list) {
   }
 }
 
+function renderCreatureDescription(creature) {
+  const { description } = creature;
+  if (description) {
+    return (
+      <React.Fragment>
+        <h3>Description</h3>
+        {Html(description)}
+      </React.Fragment>
+    );
+  } else {
+    return <span />;
+  }
+}
+
 function renderProperties(creature) {
   const {
     saves,
@@ -279,6 +293,7 @@ function CreatureBlock(props) {
         {renderList('Actions', creature.actions)}
         {renderLegendaryActions(creature.legendaryActions)}
       </div>
+      {renderCreatureDescription(creature)}
     </div>
   );
 }

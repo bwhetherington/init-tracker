@@ -25,8 +25,11 @@ class Loader extends Component {
     // Handle creature inheritance
     data = iterator(data)
       .map(creature =>
-        creature.mustExtend ? extendCreature(creature, creature['extends'], data) : creature
+        creature.mustExtend
+          ? convertCreature(extendCreature(creature, creature['extends'], data))
+          : creature
       )
+
       .collect();
 
     console.log(`Loaded ${data.length} creatures.`);
