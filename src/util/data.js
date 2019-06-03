@@ -1,3 +1,5 @@
+import { asyncIterator } from 'lazy-iters';
+
 export async function* importObjects(url) {
   const data = await fetch(url);
   const json = await data.json();
@@ -6,7 +8,13 @@ export async function* importObjects(url) {
 }
 
 export async function* importAllObjects(urls) {
-  for (const url of urls) {
-    yield* await importObjects(url);
+  const sources = await Promise.all(
+    urls.map(async url => {
+      const objects = await asyncIterator(importObjects(url)).collect();
+      return objects;
+    })
+  );
+  for (const source of sources) {
+    yield* source;
   }
 }
