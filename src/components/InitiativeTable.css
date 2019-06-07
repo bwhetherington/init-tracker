@@ -21,6 +21,7 @@
 .controls-panel {
   height: 100%;
   overflow: hidden;
+  width: 360px;
 }
 
 /* .InitiativeTable .container .controls-panel {
