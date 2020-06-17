@@ -9,11 +9,11 @@ import TableControls from './TableControls';
 class InitiativeTable extends Component {
   state = {
     creatures: [],
-    active: -1
+    active: -1,
   };
 
   componentDidMount() {
-    const oldState = window.localStorage.state;
+    const oldState = window.localStorage.initTrackerState;
     if (oldState) {
       const parsed = JSON.parse(oldState);
       this.setState(parsed);
@@ -22,7 +22,7 @@ class InitiativeTable extends Component {
 
   updateState(change) {
     // Also write state to localstorage
-    window.localStorage.state = JSON.stringify({ ...this.state, ...change });
+    window.localStorage.initTrackerState = JSON.stringify({ ...this.state, ...change });
     super.updateState(change);
   }
 
@@ -61,12 +61,12 @@ class InitiativeTable extends Component {
     }
   };
 
-  addPlayer = toAdd => {
+  addPlayer = (toAdd) => {
     const { name, initiative } = toAdd;
     const { creatures } = this.state;
 
     // Check that no other player with that name exists
-    if (!iterator(creatures).any(creature => creature.name === name)) {
+    if (!iterator(creatures).any((creature) => creature.name === name)) {
       const entry = {
         isPlayer: true,
         hp: 0,
@@ -74,16 +74,16 @@ class InitiativeTable extends Component {
         initiative,
         name,
         ac: '',
-        creature: null
+        creature: null,
       };
       const newCreatures = [...this.state.creatures, entry];
       this.updateState({ creatures: newCreatures });
     }
   };
 
-  addCreature = toAdd => {
+  addCreature = (toAdd) => {
     const { name, id } = toAdd;
-    const creature = this.props.data.filter(x => x.name === name)[0];
+    const creature = this.props.data.filter((x) => x.name === name)[0];
     if (creature !== undefined) {
       const entry = {
         isPlayer: false,
@@ -92,14 +92,14 @@ class InitiativeTable extends Component {
         initiative: rollInitiative(creature),
         name: creature.name,
         creature,
-        ac: getAC(creature)
+        ac: getAC(creature),
       };
 
       // Check that we don't have duplicates
       const newKey = `${name}:${id}`;
       const isDuplicate = iterator(this.state.creatures)
         .map(({ name, id }) => `${name}:${id}`)
-        .any(key => key === newKey);
+        .any((key) => key === newKey);
 
       if (!isDuplicate) {
         const creatures = [...this.state.creatures, entry];
@@ -132,7 +132,7 @@ class InitiativeTable extends Component {
     };
   }
 
-  onDamageCurrent = e => {
+  onDamageCurrent = (e) => {
     const { damage } = e;
     console.log(damage);
     const { active, creatures } = this.state;
@@ -143,12 +143,12 @@ class InitiativeTable extends Component {
       if (typeof entry.hp === 'number' && !Number.isNaN(damage)) {
         entry.hp -= damage;
       }
-      const newCreatures = [...creatures.map(e => (e !== original ? e : entry))];
+      const newCreatures = [...creatures.map((e) => (e !== original ? e : entry))];
       this.updateState({ creatures: newCreatures });
     }
   };
 
-  onKeyPress = e => {
+  onKeyPress = (e) => {
     if (e.key === 'Shift') {
       this.advance();
     }

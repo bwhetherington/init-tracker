@@ -12,11 +12,11 @@
     "serve": "^11.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "postinstall": "react-scripts build",
+    "start": "PUBLIC_URL=. react-scripts start",
+    "build": "PUBLIC_URL=. react-scripts build",
+    "test": "PUBLIC_URL=. react-scripts test",
+    "eject": "PUBLIC_URL=. react-scripts eject",
+    "postinstall": "PUBLIC_URL=. react-scripts build",
     "prod": "serve -s ./build/ -l $PORT"
   },
   "eslintConfig": {
