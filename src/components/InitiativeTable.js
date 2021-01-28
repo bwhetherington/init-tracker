@@ -203,6 +203,7 @@ class InitiativeTable extends Component {
         <div className="controls-panel">
           <div className="container">
             <TableControls
+              className="table-controls"
               onAddCreature={this.addCreature}
               onAddPlayer={this.addPlayer}
               onDealDamage={this.onDamageCurrent}
